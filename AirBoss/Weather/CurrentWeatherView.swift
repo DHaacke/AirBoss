@@ -9,11 +9,11 @@ import SwiftUI
 import WeatherKit
 import CoreLocation
 
-struct WeatherView: View {
+struct CurrentWeatherView: View {
     // MARK: - PROPERTIES
     let weatherManager = WeatherManager.shared
-    @State private var currentWeather: CurrentWeather?
-    @State private var dayWeather: Forecast<DayWeather>?
+    @Environment(LocationManager.self) var locationManager
+    @State private var currentWeather: (CurrentWeather, Forecast<DayWeather>)?
     @State private var isLoading = false
 
     // MARK: - FUNCTIONS
@@ -21,7 +21,7 @@ struct WeatherView: View {
     // MARK: - BODY
     var body: some View {
         ZStack {
-            WeatherBackgroundView()
+            // WeatherBackgroundView()
             VStack {
                 if isLoading {
                     ProgressView()
@@ -30,16 +30,16 @@ struct WeatherView: View {
                     if let currentWeather {
                         Text("\(Date.now.formatted(date: .abbreviated, time: .omitted)), \(Date.now.formatted(date: .omitted, time: .shortened))")
                             .foregroundColor(.white)
-                        Image(systemName: currentWeather.symbolName)
+                        Image(systemName: currentWeather.0.symbolName)
                             .renderingMode(.original)
                             .symbolVariant(.fill)
                             .font(.system(size: 36.0, weight: .bold))
                             .padding()
-                        let temp = weatherManager.temperatureFormatter.string(from: currentWeather.temperature)
+                        let temp = String(describing: ((currentWeather.0.temperature.value * 9/5) + 32).format(suffix: "°", decimals: 0))
                         Text(temp)
                             .font(.title2)
                             .foregroundColor(.white)
-                        Text(currentWeather.condition.description)
+                        Text(currentWeather.0.condition.description)
                             .font(.title3)
                             .foregroundColor(.white)
                         AttributionView()
@@ -47,15 +47,11 @@ struct WeatherView: View {
                 }
             }
             .padding(.horizontal, 10)
-//            .task {
-//                Task.detached { @MainActor in
-//                  currentWeather = await weatherManager.currentWeather(for: CLLocation(latitude: 45.79217051314525, longitude: -108.56978730094518))
-//                }
-//                isLoading = false
-//            }
             .task {
                 Task.detached { @MainActor in
-                    currentWeather = await weatherManager.currentWeather(for: CLLocation(latitude: 45.79217051314525, longitude: -108.56978730094518))
+                    if let lat = locationManager.currentLocation?.latitude, let lon = locationManager.currentLocation?.longitude {
+                        currentWeather = await weatherManager.currentWeather(for: CLLocation(latitude: lat, longitude: lon))
+                    }
                 }
                 isLoading = false
             }
@@ -65,7 +61,8 @@ struct WeatherView: View {
 }
 
 #Preview {
-    WeatherView()
+    CurrentWeatherView()
+        .environment(LocationManager())
 }
 
 

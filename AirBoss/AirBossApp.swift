@@ -10,9 +10,11 @@ import SwiftData
 
 @main
 struct AirBossApp: App {
+    @State private var locationManager = LocationManager()
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Item.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,8 +27,14 @@ struct AirBossApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if locationManager.isAuthorized {
+                ContentView()
+            } else {
+                LocationDeniedView()
+            }
+            
         }
+        .environment(locationManager)
         .modelContainer(sharedModelContainer)
     }
 }

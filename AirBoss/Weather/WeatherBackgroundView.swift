@@ -9,10 +9,31 @@ import SwiftUI
 
 struct WeatherBackgroundView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+           
+            Color.customBlackLight
+                .cornerRadius(40)
+                .opacity(0.85)
+          
+            LinearGradient(
+                colors: [.customBlackLight, .customBlackDark],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .cornerRadius(40)
+        }
+        .overlay(
+             RoundedRectangle(cornerRadius: 40)
+                .stroke(Color.accentColor, lineWidth: 6)
+            )
+
     }
 }
 
-#Preview {
+struct WeatherBackgroundView_Previews: PreviewProvider {
+    static var previews: some View {
+    
     WeatherBackgroundView()
+        .padding()
+    }
 }

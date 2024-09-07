@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class ADSB {
+final class NOTUSED {
     var Icao_addr: Int64
     var Reg: String?
     var Tail: String?

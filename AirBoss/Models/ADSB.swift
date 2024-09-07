@@ -18,7 +18,7 @@ struct ADSB: Codable {
     var Addr_type: Int
     var TargetType: Int
     var SignalLevel: Double
-    var SignalLevelHist: [Double]
+    var SignalLevelHist: [Double]?
     var Squawk: Int
     var Position_valid: Bool
     var Lat: Double

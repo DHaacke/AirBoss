@@ -7,55 +7,80 @@
 
 import SwiftUI
 import SwiftData
+import Observation
+import Combine
+
+import AudioToolbox
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    
+    // MARK: - PROPERTIES
+    //    @Environment(\.modelContext) private var modelContext
+    //    @Query private var items: [Item]
+    @Environment(LocationManager.self) var locationManager
+    
+    @State private var homeLocation: HomeLocation?
+    @State private var websocket = Websocket()
+    @State private var adsb : ADSB = Bundle.main.decode("ADSB.json")
+    @State private var isLoading = false
+    
+    // MARK: - FUNCTIONS
+    func nothing() {
+    }
+    
+    // MARK: - BODY
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+        
+        ZStack {
+            Color(.darkGray).ignoresSafeArea(.all, edges: .all)
+            HStack {
+                if isLoading {
+                    ProgressView()
+                    Text("Loading...")
+                } else {
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .leading) {
+                            DayWeatherView()
+                            Spacer()
+                            CurrentWeatherView()
+                            Spacer()
+                        }
+                        .padding()
                     }
-                }
-                .onDelete(perform: deleteItems)
+               }
+               VStack {
+                   MapView()
+                   
+               }
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+        }
+        // .frame(width: visible ? .infinity : 0, height: visible ? .infinity : 0, alignment: .center)
+        .onReceive(Just(websocket.message)) { _ in
+            // print("---> Just onReceive message: \(websocket.message)")
+            // AudioServicesPlaySystemSound(1026)
+        }
+        .onReceive(Just(websocket.adsb)) { _ in
+            if websocket.adsb != nil {
+                adsb = websocket.adsb!
             }
-        } detail: {
-            Text("Select an item")
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+        .task(id: locationManager.currentLocation) {
+            isLoading = true
+            if let currentLocation = locationManager.currentLocation {
+                homeLocation = currentLocation
+                if let lat = homeLocation?.latitude, let lon = homeLocation?.longitude {
+                    print("\(lat),  \(lon)")
+                    isLoading = false
+                }
             }
         }
     }
 }
 
+
 #Preview {
+    // @State var adsb: ADSB = Bundle.main.decode("adsb.json")
+
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+    //     .modelContainer(for: Item.self, inMemory: true)
 }
