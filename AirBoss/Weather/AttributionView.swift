@@ -18,7 +18,7 @@ struct AttributionView: View {
                         image
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 16)
+                            .frame(height: 9)
                     } placeholder: {
                         ProgressView()
                     }

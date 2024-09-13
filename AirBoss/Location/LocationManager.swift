@@ -12,6 +12,7 @@
 
 import Foundation
 import CoreLocation
+import MapKit
 
 @Observable
 class LocationManager: NSObject, CLLocationManagerDelegate {
@@ -19,6 +20,10 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var userLocation: CLLocation?
     var currentLocation: HomeLocation?
     var isAuthorized = false
+    
+    var currentLocation2D: CLLocationCoordinate2D?
+    var region: MKCoordinateRegion?
+
     
     override init() {
         super.init()
@@ -29,6 +34,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         if manager.authorizationStatus == .authorizedAlways ||
             manager.authorizationStatus == .authorizedWhenInUse {
             manager.startUpdatingLocation()
+            manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+            manager.allowsBackgroundLocationUpdates = true
+            manager.pausesLocationUpdatesAutomatically = true  //: TODO
             isAuthorized = true
         } else {
             isAuthorized = false
@@ -36,19 +44,26 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateAltitude locations: [CLLocation]) {
+        
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         userLocation = locations.last
         if let userLocation {
-            Task {
-                let name = await getLocationName(for: userLocation)
-                currentLocation = HomeLocation(
+            print("Updated location")
+            Task.detached { @MainActor in
+                let name = await self.getLocationName(for: userLocation)
+                self.currentLocation = HomeLocation(
                     name: name,
                     latitude: userLocation.coordinate.latitude,
-                    longitude: userLocation.coordinate.longitude
+                    longitude: userLocation.coordinate.longitude,
+                    altitude: userLocation.altitude.magnitude * 3.281
                 )
+                self.currentLocation2D = CLLocationCoordinate2D(latitude: self.currentLocation?.latitude ?? 0, longitude: self.currentLocation?.longitude ?? 0)
+                self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.currentLocation?.latitude ?? 0, longitude: self.currentLocation?.longitude ?? 0), span: MKCoordinateSpan(latitudeDelta: 8.0, longitudeDelta: 8.0))
             }
         }
-        
     }
     
     func getLocationName(for location: CLLocation) async -> String {

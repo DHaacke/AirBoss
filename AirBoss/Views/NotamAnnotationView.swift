@@ -9,7 +9,10 @@ import SwiftUI
 
 struct NotamAnnotationView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image(systemName: "flame")
+            .renderingMode(.template)
+            .resizable()
+            .frame(width: 30, height: 30)
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 import Observation
-import Combine
+
 
 @Observable class Websocket {
 
@@ -30,11 +30,11 @@ import Combine
             isFailure = true
             return
         }
-        let request = URLRequest(url: url)
-        webSocketTask = URLSession.shared.webSocketTask(with: request)
-        webSocketTask?.resume()
-        receiveMessage()
-        print("WebSocket connected")
+//        let request = URLRequest(url: url)
+//        webSocketTask = URLSession.shared.webSocketTask(with: request)
+//        webSocketTask?.resume()
+//        receiveMessage()
+        print("WebSocket connected: \(url)")
   
     }
     

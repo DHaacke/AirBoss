@@ -7,7 +7,9 @@
 
 import SwiftUI
 import SwiftData
+import MapKit
 import Observation
+import CoreLocation
 import Combine
 
 import AudioToolbox
@@ -18,11 +20,15 @@ struct ContentView: View {
     //    @Environment(\.modelContext) private var modelContext
     //    @Query private var items: [Item]
     @Environment(LocationManager.self) var locationManager
+    @State private var selectedHomeLocation: HomeLocation?
+    @State private var isLoading = false
     
+    @State private var position: MapCameraPosition = .automatic
     @State private var homeLocation: HomeLocation?
+    @State private var currentLocation2D: CLLocationCoordinate2D?
     @State private var websocket = Websocket()
     @State private var adsb : ADSB = Bundle.main.decode("ADSB.json")
-    @State private var isLoading = false
+    
     
     // MARK: - FUNCTIONS
     func nothing() {
@@ -30,35 +36,57 @@ struct ContentView: View {
     
     // MARK: - BODY
     var body: some View {
-        
-        ZStack {
-            Color(.darkGray).ignoresSafeArea(.all, edges: .all)
-            HStack {
-                if isLoading {
-                    ProgressView()
-                    Text("Loading...")
-                } else {
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(alignment: .leading) {
-                            DayWeatherView()
-                            Spacer()
+        TabView {
+            Group {
+                MapView()
+                    .tabItem {
+                    Label("Map", systemImage: "map")
+                }
+                .overlay (alignment: .topLeading) {
+                    VStack {
+                        if isLoading {
+                             ProgressView()
+                             Text("Loading...")
+                        } else {
                             CurrentWeatherView()
-                            Spacer()
+                                .padding(.leading, 2)
                         }
-                        .padding()
                     }
-               }
-               VStack {
-                   MapView()
-                   
-               }
+                }
+                CurrentWeatherView()
+                    .tabItem {
+                        Label("Weather", systemImage: "cloud.rain")
+                    }
             }
+            .toolbarBackground(.colorBlackDark.opacity(0.8), for: .tabBar)
+            .toolbarBackground(.visible, for: .tabBar)
+            .toolbarColorScheme(.dark, for: .tabBar)
         }
+        
+//        ZStack {
+//            // Color(.darkGray).ignoresSafeArea(.all, edges: .all)
+//            GeometryReader { g in
+//                VStack {
+//                    MapView()
+//                        .overlay (alignment: .topLeading) {
+//                            VStack {
+//                                if isLoading {
+//                                     ProgressView()
+//                                     Text("Loading...")
+//                                } else {
+//                                    CurrentWeatherView()
+//                                        .padding(.leading, 2)
+//                                }
+//                            }
+//                        }
+//                }
+//            }
+//        }
         // .frame(width: visible ? .infinity : 0, height: visible ? .infinity : 0, alignment: .center)
-        .onReceive(Just(websocket.message)) { _ in
-            // print("---> Just onReceive message: \(websocket.message)")
-            // AudioServicesPlaySystemSound(1026)
-        }
+//        .onReceive(Just(websocket.message)) { _ in
+//            // print("---> Just onReceive message: \(websocket.message)")
+//            // AudioServicesPlaySystemSound(1026)
+//        }
         .onReceive(Just(websocket.adsb)) { _ in
             if websocket.adsb != nil {
                 adsb = websocket.adsb!
@@ -68,10 +96,8 @@ struct ContentView: View {
             isLoading = true
             if let currentLocation = locationManager.currentLocation {
                 homeLocation = currentLocation
-                if let lat = homeLocation?.latitude, let lon = homeLocation?.longitude {
-                    print("\(lat),  \(lon)")
-                    isLoading = false
-                }
+                currentLocation2D = currentLocation.location2D
+                isLoading = false
             }
         }
     }
@@ -82,5 +108,6 @@ struct ContentView: View {
     // @State var adsb: ADSB = Bundle.main.decode("adsb.json")
 
     ContentView()
+        .environment(LocationManager())
     //     .modelContainer(for: Item.self, inMemory: true)
 }

@@ -16,6 +16,7 @@ struct DayWeatherView: View {
     @State private var currentWeather: (CurrentWeather, Forecast<DayWeather>)?
     @State private var isLoading = false
     @State private var dayItems : [DayItem] = []
+    @State private var selectedHomeLocation: HomeLocation?
     
     @State private var selection: Int = 1
     
@@ -74,39 +75,20 @@ struct DayWeatherView: View {
     
     // MARK: - BODY
     var body: some View {
-        
+       
         VStack {
-            RoundedRectangle(cornerRadius: 12)
-                .foregroundColor(.accent)
-                .frame(width: 228, height: 208)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(
-                            LinearGradient(gradient: Gradient(colors: [Color.colorGrayLight, Color.colorBlackDark]), startPoint: .top, endPoint: .bottom)
-                        )
-                        // .foregroundColor(.black)
-                        .frame(width: 220, height: 200)
-                        
-                        .overlay(
-                            VStack {
-                                if isLoading {
-                                    ProgressView()
-                                    Text("Fetching Weather")
-                                } else {
-                                    ForEach(dayItems) { item in
-                                        HStack {
-                                            Text(item.title).font(.caption).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                                            Spacer()
-                                            Text(item.value).font(.caption)
-                                        }
-                                    }
-                                }
-                            }
-                                .padding()
-                                .frame(width: 220)
-                        )
-                )
-                .offset(x: 4, y: 4)
+            if isLoading {
+                ProgressView()
+                Text("Fetching Weather")
+            } else {
+                ForEach(dayItems) { item in
+                    HStack {
+                        Text(item.title).font(.caption).fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        Spacer()
+                        Text(item.value).font(.caption)
+                    }
+                }
+            }
         }
         .padding()
         .frame(width: 228)
@@ -119,9 +101,24 @@ struct DayWeatherView: View {
             }
             isLoading = false
         }
-
-            
-
+        .task(id: locationManager.currentLocation) {
+            if let currentLocation = locationManager.currentLocation, selectedHomeLocation == nil {
+                selectedHomeLocation = currentLocation
+            }
+        }
+        .task(id: selectedHomeLocation) {
+            if let selectedHomeLocation {
+                await fetchWeather(for: selectedHomeLocation)
+            }
+        }
+    }
+    
+    func fetchWeather(for homeLocation: HomeLocation) async {
+        isLoading = true
+        Task.detached { @MainActor in
+            currentWeather = await weatherManager.currentWeather(for: homeLocation.clLocation)
+        }
+        isLoading = false
     }
 }
 

@@ -9,77 +9,63 @@ import SwiftUI
 import MapKit
 import WeatherKit
 
-extension CLLocationCoordinate2D {
-    static let home = CLLocationCoordinate2D(latitude: 45.79208074322167, longitude: -108.56983021630413)
-}
-
 struct MapView: View {
-    // MARK: - PROPERTIES
-    // 45.79208074322167, -108.56983021630413
+    let weatherManager = WeatherManager.shared
     @Environment(LocationManager.self) var locationManager
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 45.79208074322167, longitude: -108.56983021630413), span: MKCoordinateSpan(latitudeDelta: 8.0, longitudeDelta: 8.0))
+    // 45.79208074322167, -108.56983021630413
+    
     @State private var position: MapCameraPosition = .automatic
     @State private var visibleRegion: MKCoordinateRegion?
-    
-    let weatherManager = WeatherManager.shared
-    
-    @State private var currentWeather: (CurrentWeather, Forecast<DayWeather>)?
-    @State private var isLoading = false
 
-    // MARK: - BODY
+    @State private var notams: [NotamData] = []
+
+    let notamManager = NotamManager()
+    
+    // 45.79211066654558, -108.56983021628744
     
     var body: some View {
         VStack {
-            Map(position: $position) {
-                // Map(coordinateRegion: $region)
-                Marker("Home", coordinate: .home)
-            } //: NAVIGATION
-            .mapStyle(.standard(elevation: .flat))
-//            .safeAreaInset(edge: .bottom) {
-//                
-//            }
-        }
-        .frame(minWidth: 400, idealWidth: 800, maxWidth: 900, minHeight: 800, idealHeight: 1200, maxHeight: 1300)
-        .cornerRadius(12)
-        .overlay (alignment: .topLeading) {
-            ZStack {
-                if isLoading == true {
-                    ProgressView()
-                } else {
-                    if let currentWeather {
-                        Text("Howdy")
-                        Text("\(Date.now.formatted(date: .abbreviated, time: .omitted)), \(Date.now.formatted(date: .omitted, time: .shortened))")
-                            .foregroundColor(.white)
-                        Image(systemName: currentWeather.0.symbolName)
-                            .renderingMode(.original)
-                            .symbolVariant(.fill)
-                            .font(.system(size: 36.0, weight: .bold))
-                            .padding()
-                        let temp = String(describing: ((currentWeather.0.temperature.value * 9/5) + 32).format(suffix: "°", decimals: 0))
-                        Text(temp)
-                            .font(.title2)
-                            .foregroundColor(.white)
-                        Text(currentWeather.0.condition.description)
-                            .font(.title3)
-                            .foregroundColor(.white)
-                        AttributionView()
+            Map(position: $position) {  // , interactionModes: [.pan, .zoom]
+                if let coord = locationManager.currentLocation?.coordinate {
+                    if notams.count > 0 {
+                        Annotation("Home", coordinate: coord) {
+                            HeliAnimationView(bodyName: "L1TL", rotorName: "ROTOR-00")
+                        }
+                        ForEach(notams, id: \.self.id) { notam in
+                            Annotation("Fire", coordinate: notam.coordinate) {
+                                NotamAnnotationView()
+                            }
+                        }
+                        
                     }
                 }
             }
+            .mapStyle(.standard(elevation: .flat))
+            .onMapCameraChange { context in
+                visibleRegion = context.region
+            }
+            
         }
-        .task {
+        .frame(minWidth: 400, idealWidth: .infinity, maxWidth: .infinity, minHeight: 800, idealHeight: .infinity, maxHeight: .infinity)
+        .cornerRadius(12)
+        .onAppear() {
             Task.detached { @MainActor in
-                isLoading = true
-                if let lat = locationManager.currentLocation?.latitude, let lon = locationManager.currentLocation?.longitude {
-                    currentWeather = await weatherManager.currentWeather(for: CLLocation(latitude: lat, longitude: lon))
+                do {
+                    if let lat = locationManager.userLocation?.coordinate.latitude, let lon = locationManager.userLocation?.coordinate.longitude {
+                        notams = try await notamManager.getNotams(latitude: lat, longitude: lon)!
+                        print("Notams:  \(notams.count)")
+                        // dump(notam, indent: 4)
+                        
+                    }
+                } catch {
+                    print("Notams Task Error")
                 }
-                isLoading = false
             }
         }
     }
 }
 
-#Preview {
-    MapView()
-        .environment(LocationManager())
-}
+//#Preview {
+//    MapView(, notams: <#[NotamData]#>)
+//        .environment(LocationManager())
+//}

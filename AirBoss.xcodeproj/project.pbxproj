@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		912863912C92489200172F77 /* HeliAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912863902C92489200172F77 /* HeliAnimationView.swift */; };
+		912863932C9251E400172F77 /* NotamAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912863922C9251E400172F77 /* NotamAnnotationView.swift */; };
+		912863952C929A0D00172F77 /* NotamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912863942C929A0D00172F77 /* NotamData.swift */; };
 		913199522C877CB20012F1F6 /* CodableBundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913199512C877CB20012F1F6 /* CodableBundleExtension.swift */; };
 		9161A57D2C8BE98900BEE1E6 /* HomeLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9161A57C2C8BE98900BEE1E6 /* HomeLocation.swift */; };
 		9161A5802C8BE9D400BEE1E6 /* LocationDeniedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9161A57F2C8BE9D400BEE1E6 /* LocationDeniedView.swift */; };
 		9161A5832C8BEAA200BEE1E6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9161A5822C8BEAA200BEE1E6 /* LocationManager.swift */; };
 		918510442C84EDEB005D927C /* AirBossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918510432C84EDEB005D927C /* AirBossApp.swift */; };
 		918510462C84EDEB005D927C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918510452C84EDEB005D927C /* ContentView.swift */; };
-		918510482C84EDEB005D927C /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918510472C84EDEB005D927C /* Item.swift */; };
 		9185104A2C84EDEC005D927C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 918510492C84EDEC005D927C /* Assets.xcassets */; };
 		9185104D2C84EDEC005D927C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9185104C2C84EDEC005D927C /* Preview Assets.xcassets */; };
 		918510552C84EEA2005D927C /* Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918510542C84EEA2005D927C /* Websocket.swift */; };
 		918510582C8537BF005D927C /* NOT USED ADSB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918510572C8537BF005D927C /* NOT USED ADSB.swift */; };
 		9185105A2C853894005D927C /* ADSB.json in Resources */ = {isa = PBXBuildFile; fileRef = 918510592C853894005D927C /* ADSB.json */; };
 		9185105D2C855593005D927C /* ADSB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9185105C2C855593005D927C /* ADSB.swift */; };
+		9194226C2C914C910067231D /* RotorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9194226B2C914C910067231D /* RotorView.swift */; };
+		919807852C8FF71F0005DCCD /* notam.json in Resources */ = {isa = PBXBuildFile; fileRef = 919807842C8FF71F0005DCCD /* notam.json */; };
 		91ADD1BB2C8A0818002FC779 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ADD1BA2C8A0818002FC779 /* WeatherManager.swift */; };
 		91ADD1BD2C8A4D29002FC779 /* AttributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ADD1BC2C8A4D29002FC779 /* AttributionView.swift */; };
 		91ADD1BF2C8A6065002FC779 /* DayWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ADD1BE2C8A6065002FC779 /* DayWeatherView.swift */; };
@@ -35,9 +39,15 @@
 		91B750362C89278F001BEAB9 /* WeatherBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B750352C89278F001BEAB9 /* WeatherBackgroundView.swift */; };
 		91B750382C89290B001BEAB9 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B750372C89290B001BEAB9 /* ColorExtension.swift */; };
 		91B7503B2C894699001BEAB9 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7503A2C894699001BEAB9 /* MapView.swift */; };
+		91C3CA232C8E904500D6B5EE /* NotamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3CA222C8E904500D6B5EE /* NotamModel.swift */; };
+		91C3CA262C8E92FC00D6B5EE /* NotamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3CA252C8E92FC00D6B5EE /* NotamManager.swift */; };
+		91C3CA282C8E992F00D6B5EE /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3CA272C8E992F00D6B5EE /* URLSession+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		912863902C92489200172F77 /* HeliAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliAnimationView.swift; sourceTree = "<group>"; };
+		912863922C9251E400172F77 /* NotamAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamAnnotationView.swift; sourceTree = "<group>"; };
+		912863942C929A0D00172F77 /* NotamData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamData.swift; sourceTree = "<group>"; };
 		913199512C877CB20012F1F6 /* CodableBundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBundleExtension.swift; sourceTree = "<group>"; };
 		9161A57C2C8BE98900BEE1E6 /* HomeLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLocation.swift; sourceTree = "<group>"; };
 		9161A57F2C8BE9D400BEE1E6 /* LocationDeniedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDeniedView.swift; sourceTree = "<group>"; };
@@ -45,13 +55,14 @@
 		918510402C84EDEB005D927C /* AirBoss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirBoss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918510432C84EDEB005D927C /* AirBossApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirBossApp.swift; sourceTree = "<group>"; };
 		918510452C84EDEB005D927C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		918510472C84EDEB005D927C /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		918510492C84EDEC005D927C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9185104C2C84EDEC005D927C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		918510542C84EEA2005D927C /* Websocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Websocket.swift; sourceTree = "<group>"; };
 		918510572C8537BF005D927C /* NOT USED ADSB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NOT USED ADSB.swift"; sourceTree = "<group>"; };
 		918510592C853894005D927C /* ADSB.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = ADSB.json; sourceTree = "<group>"; };
 		9185105C2C855593005D927C /* ADSB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADSB.swift; sourceTree = "<group>"; };
+		9194226B2C914C910067231D /* RotorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotorView.swift; sourceTree = "<group>"; };
+		919807842C8FF71F0005DCCD /* notam.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = notam.json; path = AirBoss/Models/notam.json; sourceTree = SOURCE_ROOT; };
 		91ADD1BA2C8A0818002FC779 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		91ADD1BC2C8A4D29002FC779 /* AttributionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributionView.swift; sourceTree = "<group>"; };
 		91ADD1BE2C8A6065002FC779 /* DayWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherView.swift; sourceTree = "<group>"; };
@@ -68,6 +79,9 @@
 		91B750372C89290B001BEAB9 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		91B7503A2C894699001BEAB9 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		91B7503C2C8963FE001BEAB9 /* AirBoss.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AirBoss.entitlements; sourceTree = "<group>"; };
+		91C3CA222C8E904500D6B5EE /* NotamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamModel.swift; sourceTree = "<group>"; };
+		91C3CA252C8E92FC00D6B5EE /* NotamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamManager.swift; sourceTree = "<group>"; };
+		91C3CA272C8E992F00D6B5EE /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +108,7 @@
 				91ADD1C22C8A681D002FC779 /* String+Extensions.swift */,
 				91B750372C89290B001BEAB9 /* ColorExtension.swift */,
 				913199512C877CB20012F1F6 /* CodableBundleExtension.swift */,
+				91C3CA272C8E992F00D6B5EE /* URLSession+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -104,6 +119,7 @@
 				9161A57C2C8BE98900BEE1E6 /* HomeLocation.swift */,
 				9185105C2C855593005D927C /* ADSB.swift */,
 				918510592C853894005D927C /* ADSB.json */,
+				91C3CA222C8E904500D6B5EE /* NotamModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -112,6 +128,9 @@
 			isa = PBXGroup;
 			children = (
 				9161A57F2C8BE9D400BEE1E6 /* LocationDeniedView.swift */,
+				9194226B2C914C910067231D /* RotorView.swift */,
+				912863902C92489200172F77 /* HeliAnimationView.swift */,
+				912863922C9251E400172F77 /* NotamAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -143,9 +162,10 @@
 		918510422C84EDEB005D927C /* AirBoss */ = {
 			isa = PBXGroup;
 			children = (
+				91C3CA242C8E908C00D6B5EE /* Notam */,
+				9161A57B2C8BE95E00BEE1E6 /* Models */,
 				9161A5812C8BEA0400BEE1E6 /* Location */,
 				9161A57E2C8BE9BC00BEE1E6 /* Views */,
-				9161A57B2C8BE95E00BEE1E6 /* Models */,
 				91B7503C2C8963FE001BEAB9 /* AirBoss.entitlements */,
 				91B750392C894682001BEAB9 /* Map */,
 				91B750322C8926FD001BEAB9 /* Weather */,
@@ -179,7 +199,6 @@
 		918510562C853781005D927C /* SwiftData Models */ = {
 			isa = PBXGroup;
 			children = (
-				918510472C84EDEB005D927C /* Item.swift */,
 				918510572C8537BF005D927C /* NOT USED ADSB.swift */,
 			);
 			path = "SwiftData Models";
@@ -203,6 +222,16 @@
 				91B7503A2C894699001BEAB9 /* MapView.swift */,
 			);
 			path = Map;
+			sourceTree = "<group>";
+		};
+		91C3CA242C8E908C00D6B5EE /* Notam */ = {
+			isa = PBXGroup;
+			children = (
+				91C3CA252C8E92FC00D6B5EE /* NotamManager.swift */,
+				919807842C8FF71F0005DCCD /* notam.json */,
+				912863942C929A0D00172F77 /* NotamData.swift */,
+			);
+			path = Notam;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9185104D2C84EDEC005D927C /* Preview Assets.xcassets in Resources */,
+				919807852C8FF71F0005DCCD /* notam.json in Resources */,
 				9185105A2C853894005D927C /* ADSB.json in Resources */,
 				9185104A2C84EDEC005D927C /* Assets.xcassets in Resources */,
 			);
@@ -279,17 +309,23 @@
 				9161A5802C8BE9D400BEE1E6 /* LocationDeniedView.swift in Sources */,
 				91ADD1CF2C8A681E002FC779 /* CGFloat+Extensions.swift in Sources */,
 				9161A5832C8BEAA200BEE1E6 /* LocationManager.swift in Sources */,
+				912863932C9251E400172F77 /* NotamAnnotationView.swift in Sources */,
+				91C3CA262C8E92FC00D6B5EE /* NotamManager.swift in Sources */,
 				918510462C84EDEB005D927C /* ContentView.swift in Sources */,
 				91ADD1C82C8A681E002FC779 /* CLLocation+Extensions.swift in Sources */,
+				912863912C92489200172F77 /* HeliAnimationView.swift in Sources */,
 				918510552C84EEA2005D927C /* Websocket.swift in Sources */,
+				912863952C929A0D00172F77 /* NotamData.swift in Sources */,
 				9161A57D2C8BE98900BEE1E6 /* HomeLocation.swift in Sources */,
 				91ADD1CB2C8A681E002FC779 /* Data+Extensions.swift in Sources */,
-				918510482C84EDEB005D927C /* Item.swift in Sources */,
 				91B7503B2C894699001BEAB9 /* MapView.swift in Sources */,
 				91B750362C89278F001BEAB9 /* WeatherBackgroundView.swift in Sources */,
+				91C3CA232C8E904500D6B5EE /* NotamModel.swift in Sources */,
 				918510442C84EDEB005D927C /* AirBossApp.swift in Sources */,
 				91ADD1BF2C8A6065002FC779 /* DayWeatherView.swift in Sources */,
 				91ADD1CE2C8A681E002FC779 /* Double+Extensions.swift in Sources */,
+				9194226C2C914C910067231D /* RotorView.swift in Sources */,
+				91C3CA282C8E992F00D6B5EE /* URLSession+Extension.swift in Sources */,
 				91ADD1CD2C8A681E002FC779 /* Int+Extensions.swift in Sources */,
 				91ADD1CC2C8A681E002FC779 /* CLLocationCoordinate2D+Extensions.swift in Sources */,
 				91ADD1BB2C8A0818002FC779 /* WeatherManager.swift in Sources */,
@@ -443,8 +479,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -478,8 +514,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

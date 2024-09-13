@@ -9,8 +9,9 @@ import CoreLocation
 struct HomeLocation: Identifiable, Hashable {
     var id = UUID()
     var name: String
-    var latitude: Double
-    var longitude: Double
+    var latitude: Double = 0
+    var longitude: Double = 0
+    var altitude: Double = 0
     
     @ObservationIgnored var location : CLLocation {
         return CLLocation(latitude: self.coordinate.latitude, longitude: self.coordinate.longitude)
