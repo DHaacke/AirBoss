@@ -89,7 +89,7 @@ class NotamManager: NSObject {
                     }
                     // print("Match strings: \(matchStrings)")
                     freq = matchStrings.joined()
-                    print(freq)
+                    // print(freq)
                 }
             }
             
@@ -125,8 +125,8 @@ class NotamManager: NSObject {
             }
                         
             // print("NOTAM:  \(text)")
-            print("NOTAM:  \(polygons)")
-            print("----------------------")
+//            print("NOTAM:  \(polygons)")
+//            print("----------------------")
             
             if distance.metersToMiles() > 0 {
                 // print("NOTAM in \(distance.metersToMiles().format(suffix: " miles", decimals: 0)) range at \(coordinate.latitude), \(coordinate.longitude)")
@@ -134,7 +134,7 @@ class NotamManager: NSObject {
                 notamArray.append(notam)
                 // print(notam)
             } else {
-                print("NOTAM out of range (\(radius):  \(coordinate.latitude), \(coordinate.longitude))")
+                // print("NOTAM out of range (\(radius):  \(coordinate.latitude), \(coordinate.longitude))")
             }
                         
         }

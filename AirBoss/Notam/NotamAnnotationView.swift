@@ -19,6 +19,7 @@ struct NotamSheetView: View {
     var freq: String?
     var text: String?
     var coordinate: CLLocationCoordinate2D?
+    var polygons: [CLLocationCoordinate2D]?
     
     var body: some View {
         VStack {
@@ -51,6 +52,13 @@ struct NotamSheetView: View {
                         Image(systemName: "flame")    // .rotationEffect(.degrees(270))
                     }
                 }
+                if let polygons {
+                    if polygons.count > 0 {
+                        MapPolygon(coordinates: polygons)
+                            .foregroundStyle(.orange.opacity(0.4))
+                            .stroke(.orange.opacity(0.5), lineWidth: 2)
+                    }
+                }
             }
             .mapStyle(.imagery)
             .onMapCameraChange { context in
@@ -71,7 +79,8 @@ struct NotamSheetView: View {
             .padding()
         }
         .padding(.top, 8)
-        .frame(width: 400, height: 650)
+        // .frame(width: 400, height: 650)
+        .frame(minWidth: 300, idealWidth: 400, maxWidth: 400, minHeight: 500, idealHeight: .infinity, maxHeight: .infinity)
         .onAppear  {
             if let coordinate {
                 position = MapCameraPosition.region(
@@ -102,6 +111,7 @@ struct NotamAnnotationView: View {
     var subtitle: String?
     var text: String?
     var coordinate: CLLocationCoordinate2D?
+    var polygons: [CLLocationCoordinate2D]?
     
     @State private var isShowingNotamText = false
     @State private var isShowingSheet = false
@@ -116,7 +126,7 @@ struct NotamAnnotationView: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 .sheet(isPresented: $isShowingSheet, content: {
-                    NotamSheetView(freq: title!, text: text!, coordinate: coordinate)
+                    NotamSheetView(freq: title!, text: text!, coordinate: coordinate, polygons: polygons)
                 })
 
 //                Image(systemName: "flame")
@@ -176,7 +186,6 @@ struct NotamAnnotationView: View {
 //                }
             }
             .onTapGesture {
-                print("Tapped!")
                 isShowingNotamText.toggle()
                 
             }

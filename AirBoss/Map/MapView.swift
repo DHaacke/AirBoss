@@ -48,13 +48,12 @@ struct MapView: View {
                         ForEach(notams, id: \.self.id) { notam in
                             if notam.coordinate.latitude != 0 && notam.coordinate.longitude != 0 {
                                 Annotation("", coordinate: notam.coordinate) {
-                                    NotamAnnotationView(title: notam.freq, subtitle: "", text: notam.text, coordinate: notam.coordinate)
+                                    NotamAnnotationView(title: notam.freq, subtitle: "", text: notam.text, coordinate: notam.coordinate, polygons: notam.polygons)
                                 }
-                                
                                 if notam.polygons.count > 0 {
-                                    MapPolygon(coordinates: notam.polygons)  // CLLocationCoordinate2D.locations
-                                        .foregroundStyle(.orange.opacity(0.9))
-                                        .stroke(.orange.opacity(0.7), lineWidth: 8)
+                                    MapPolygon(coordinates: notam.polygons)         // CLLocationCoordinate2D.locations
+                                        .foregroundStyle(.orange.opacity(0.4))
+                                        .stroke(.orange.opacity(0.5), lineWidth: 2)
                                 }
                             }
                             
@@ -92,5 +91,6 @@ struct MapView: View {
 //    MapView(, notams: <#[NotamData]#>)
 //        .environment(LocationManager())
 //}
+
 
 
