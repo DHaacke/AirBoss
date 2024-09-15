@@ -77,10 +77,11 @@ class NotamManager: NSObject {
             var distance :Double = 0
             var freq: String = ""
             var gps: String = ""
+            var polygons: [CLLocationCoordinate2D] = []
             
             if text.contains("FREQ") {
                 let inputString = text
-                let pattern = "FREQ ?[0-9]{3}\\.[0-9]{2,4}"
+                let pattern = "FREQ ?[0-9]{3}\\.[0-9]{1,4}"
                 if let regex = try? NSRegularExpression(pattern: pattern) {
                     let matches = regex.matches(in: inputString, range: NSRange(inputString.startIndex..., in: inputString))
                     let matchStrings = matches.map { match in
@@ -94,8 +95,8 @@ class NotamManager: NSObject {
             
             if let geoArray = geometries {
                 if geoArray.count > 0 {
-                    // print("Geometries found in NOTAMs!")
                     let geo = geoArray[0]
+                    // get the first one for our fire location
                     if let coordsArray = geo.coordinates {
                         let revCoord = coordsArray[0][0] as CLLocationCoordinate2D
                         coordinate = CLLocationCoordinate2D(latitude: revCoord.longitude, longitude: revCoord.latitude)
@@ -106,14 +107,30 @@ class NotamManager: NSObject {
                         text += "\nGPS:  \(target.latitude), \(target.longitude)\nDistance away: \(distance.metersToMiles().format(suffix: " miles", decimals: 0))"
                         // print("Distance away: \(distance.metersToMiles())mi")
                     }
+                    // build the polygons array
+                    if let geoArray = geometries {
+                        for geo in geoArray {
+                            if let coordsArrayBase = geo.coordinates {
+                                polygons = []
+                                for coordsArray in coordsArrayBase  {
+                                    for (_, coords) in coordsArray.enumerated() {
+                                        let swiftCoords : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: coords.longitude, longitude: coords.latitude)
+                                        polygons.append(swiftCoords)
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
                         
             // print("NOTAM:  \(text)")
+            print("NOTAM:  \(polygons)")
+            print("----------------------")
             
             if distance.metersToMiles() > 0 {
                 // print("NOTAM in \(distance.metersToMiles().format(suffix: " miles", decimals: 0)) range at \(coordinate.latitude), \(coordinate.longitude)")
-                let notam = NotamData(id: id, number: number, type: type, issued: issued, location: location, effectiveStart: effectiveStart, effectiveEnd: effectiveEnd, text: text, classification: classification, accountId: accountId, lastUpdated: lastUpdated, icaoLocation: icaoLocation, schedule: schedule, notamTranslation: notamTranslation, geometryType: geometryType, geometries: geometries, coordinate: coordinate, distance: distance.metersToMiles(), freq: freq, gps: gps)
+                let notam = NotamData(id: id, number: number, type: type, issued: issued, location: location, effectiveStart: effectiveStart, effectiveEnd: effectiveEnd, text: text, classification: classification, accountId: accountId, lastUpdated: lastUpdated, icaoLocation: icaoLocation, schedule: schedule, notamTranslation: notamTranslation, geometryType: geometryType, geometries: geometries, coordinate: coordinate, distance: distance.metersToMiles(), freq: freq, gps: gps, polygons: polygons)
                 notamArray.append(notam)
                 // print(notam)
             } else {

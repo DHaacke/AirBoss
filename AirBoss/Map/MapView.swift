@@ -9,6 +9,17 @@ import SwiftUI
 import MapKit
 import WeatherKit
 
+extension CLLocationCoordinate2D {
+    static let locations = [
+    CLLocationCoordinate2D(latitude: 11.3844028, longitude: 45.6174815),
+    CLLocationCoordinate2D(latitude: 11.5608707, longitude: 45.3305094),
+    CLLocationCoordinate2D(latitude: 11.8533817, longitude: 45.4447992),
+    CLLocationCoordinate2D(latitude: 11.8382755, longitude: 45.6314077),
+    CLLocationCoordinate2D(latitude: 11.6624943, longitude: 45.6942722),
+    CLLocationCoordinate2D(latitude: 11.3844028, longitude: 45.6174815)]
+}
+
+
 struct MapView: View {
     let weatherManager = WeatherManager.shared
     @Environment(LocationManager.self) var locationManager
@@ -35,16 +46,18 @@ struct MapView: View {
                             HeliAnimationView(bodyName: "L1TL", rotorName: "ROTOR-00")
                         }
                         ForEach(notams, id: \.self.id) { notam in
-                            // NotamAnnotation(coordinate: notam.coordinate, title: notam.freq, subtitle: "subtitle", image: UIImage(systemName: "flame"), text: notam.text) {
-                            // NotamAnnotationView(notam: notam)
                             if notam.coordinate.latitude != 0 && notam.coordinate.longitude != 0 {
-                                
-                               Annotation("", coordinate: notam.coordinate) {
-                                   NotamAnnotationView(title: notam.freq, subtitle: "Subtitle", text: notam.text, coordinate: notam.coordinate)
+                                Annotation("", coordinate: notam.coordinate) {
+                                    NotamAnnotationView(title: notam.freq, subtitle: "", text: notam.text, coordinate: notam.coordinate)
                                 }
                                 
+                                if notam.polygons.count > 0 {
+                                    MapPolygon(coordinates: notam.polygons)  // CLLocationCoordinate2D.locations
+                                        .foregroundStyle(.orange.opacity(0.9))
+                                        .stroke(.orange.opacity(0.7), lineWidth: 8)
+                                }
                             }
-
+                            
                         }
                     }
                 }
@@ -79,3 +92,5 @@ struct MapView: View {
 //    MapView(, notams: <#[NotamData]#>)
 //        .environment(LocationManager())
 //}
+
+

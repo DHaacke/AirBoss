@@ -29,13 +29,18 @@ struct NotamSheetView: View {
                 .foregroundStyle(.yellow)
                 .frame(width: 64, height: 64, alignment: .bottom)
                 .background(.clear)
+                .padding(.top, 8)
                 .onTapGesture {
                     dismiss()
                 }
+            if let freq {
+                Text(freq)
+                    .font(.system(size: 16.0, weight: .medium))
+            }
             Text(text!)
                 .font(.system(size: 14.0, weight: .medium))
-                .padding(8)
-                .minimumScaleFactor(0.8)
+                .padding(6)
+                .minimumScaleFactor(0.7)
                 .background {
                      Color.colorBlackLight
                 }
@@ -49,11 +54,9 @@ struct NotamSheetView: View {
             }
             .mapStyle(.imagery)
             .onMapCameraChange { context in
-                print("Map Camera change")
                 visibleRegion = context.region
             }
             .mapFeatureSelectionDisabled { _ in false }
-
             
             Button {
                 dismiss()
@@ -62,21 +65,26 @@ struct NotamSheetView: View {
                     .padding()
                     .foregroundStyle(.white)
             }
+            .buttonStyle(PlainButtonStyle())
+            .background(.clear)
             .font(.title)
             .padding()
-            .background(.black)
         }
-        .frame(width: 400, height: 800)
+        .padding(.top, 8)
+        .frame(width: 400, height: 650)
         .onAppear  {
             if let coordinate {
                 position = MapCameraPosition.region(
                     MKCoordinateRegion(
                         center: CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude),
-                        span: MKCoordinateSpan(latitudeDelta: 9, longitudeDelta: 9)
+                        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
                     )
                 )
-                visibleRegion = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 9.0, longitudeDelta: 9.0))
+                visibleRegion = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
             }
+            
+//            if let geoArray = geometries {
+//                if geoArray.count > 0 {
         }
         
     }
@@ -106,9 +114,11 @@ struct NotamAnnotationView: View {
                 Button("", systemImage: "flame") {
                     isShowingSheet.toggle()
                 }
+                .buttonStyle(PlainButtonStyle())
                 .sheet(isPresented: $isShowingSheet, content: {
-                    NotamSheetView(text: text!, coordinate: coordinate)
+                    NotamSheetView(freq: title!, text: text!, coordinate: coordinate)
                 })
+
 //                Image(systemName: "flame")
 //                    .renderingMode(.original)
 //                    .symbolVariant(.fill)
