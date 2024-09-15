@@ -40,7 +40,7 @@ struct MapView: View {
                             if notam.coordinate.latitude != 0 && notam.coordinate.longitude != 0 {
                                 
                                Annotation("", coordinate: notam.coordinate) {
-                                    NotamAnnotationView(title: notam.freq, subtitle: "Subtitle", text: notam.text)
+                                   NotamAnnotationView(title: notam.freq, subtitle: "Subtitle", text: notam.text, coordinate: notam.coordinate)
                                 }
                                 
                             }
