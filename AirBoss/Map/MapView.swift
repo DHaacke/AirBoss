@@ -18,8 +18,11 @@ struct MapView: View {
     @State private var visibleRegion: MKCoordinateRegion?
 
     @State private var notams: [NotamData] = []
+    
+    @State private var isShowingNotam = false
 
     let notamManager = NotamManager()
+    
     
     // 45.79211066654558, -108.56983021628744
     
@@ -32,14 +35,21 @@ struct MapView: View {
                             HeliAnimationView(bodyName: "L1TL", rotorName: "ROTOR-00")
                         }
                         ForEach(notams, id: \.self.id) { notam in
-                            Annotation("Fire", coordinate: notam.coordinate) {
-                                NotamAnnotationView()
+                            // NotamAnnotation(coordinate: notam.coordinate, title: notam.freq, subtitle: "subtitle", image: UIImage(systemName: "flame"), text: notam.text) {
+                            // NotamAnnotationView(notam: notam)
+                            if notam.coordinate.latitude != 0 && notam.coordinate.longitude != 0 {
+                                
+                               Annotation("", coordinate: notam.coordinate) {
+                                    NotamAnnotationView(title: notam.freq, subtitle: "Subtitle", text: notam.text)
+                                }
+                                
                             }
+
                         }
-                        
                     }
                 }
             }
+            .ignoresSafeArea()
             .mapStyle(.standard(elevation: .flat))
             .onMapCameraChange { context in
                 visibleRegion = context.region

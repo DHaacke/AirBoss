@@ -20,15 +20,18 @@ struct ContentView: View {
     //    @Environment(\.modelContext) private var modelContext
     //    @Query private var items: [Item]
     @Environment(LocationManager.self) var locationManager
+    @Environment(WeatherManager.self) var weatherManager
+    
     @State private var selectedHomeLocation: HomeLocation?
     @State private var isLoading = false
+    @State private var isShowingWeather = false
     
     @State private var position: MapCameraPosition = .automatic
     @State private var homeLocation: HomeLocation?
     @State private var currentLocation2D: CLLocationCoordinate2D?
     @State private var websocket = Websocket()
     @State private var adsb : ADSB = Bundle.main.decode("ADSB.json")
-    
+   
     
     // MARK: - FUNCTIONS
     func nothing() {
@@ -42,16 +45,30 @@ struct ContentView: View {
                     .tabItem {
                     Label("Map", systemImage: "map")
                 }
-                .overlay (alignment: .topLeading) {
+                    .overlay (alignment: .topLeading) {
                     VStack {
                         if isLoading {
                              ProgressView()
                              Text("Loading...")
                         } else {
-                            CurrentWeatherView()
-                                .padding(.leading, 2)
+                            if isShowingWeather {
+                                CurrentWeatherView()
+                                    .onTapGesture {
+                                        isShowingWeather.toggle()
+                                    }
+                            } else {
+                                Image(systemName: weatherManager.currentWeatherSymbol )
+                                    .renderingMode(.original)
+                                    .symbolVariant(.fill)
+                                    .font(.system(size: 30.0, weight: .bold))
+                                    .padding(12)
+                                    .onTapGesture {
+                                        isShowingWeather.toggle()
+                                    }
+                            }
                         }
                     }
+                    .padding(.top, 12)
                 }
                 CurrentWeatherView()
                     .tabItem {
@@ -109,5 +126,6 @@ struct ContentView: View {
 
     ContentView()
         .environment(LocationManager())
+        .environment(WeatherManager())
     //     .modelContainer(for: Item.self, inMemory: true)
 }

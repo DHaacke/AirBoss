@@ -28,6 +28,8 @@ struct NotamData {
     let geometries : [Geometries]?
     var coordinate: CLLocationCoordinate2D
     var distance: Double = 0
+    var freq: String = ""
+    var gps: String = ""
     
     var formattedEffectiveStart : String {
         let dateFormatter = DateFormatter()

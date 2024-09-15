@@ -64,7 +64,7 @@ class NotamManager: NSObject {
             let location            = item.properties.coreNOTAMData.notam.location
             let effectiveStart      = item.properties.coreNOTAMData.notam.effectiveStart
             let effectiveEnd        = item.properties.coreNOTAMData.notam.effectiveEnd
-            var text                = item.properties.coreNOTAMData.notam.text
+            var text                = item.properties.coreNOTAMData.notam.text.replacingOccurrences(of: "\n", with: " ", options: NSString.CompareOptions.literal, range: nil)
             let classification      = item.properties.coreNOTAMData.notam.classification
             let accountId           = item.properties.coreNOTAMData.notam.accountId
             let lastUpdated         = item.properties.coreNOTAMData.notam.lastUpdated
@@ -75,6 +75,22 @@ class NotamManager: NSObject {
             let geometries          = item.geometry.geometries
             var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
             var distance :Double = 0
+            var freq: String = ""
+            var gps: String = ""
+            
+            if text.contains("FREQ") {
+                let inputString = text
+                let pattern = "FREQ ?[0-9]{3}\\.[0-9]{2,4}"
+                if let regex = try? NSRegularExpression(pattern: pattern) {
+                    let matches = regex.matches(in: inputString, range: NSRange(inputString.startIndex..., in: inputString))
+                    let matchStrings = matches.map { match in
+                      String(inputString[Range(match.range, in: inputString)!])
+                    }
+                    // print("Match strings: \(matchStrings)")
+                    freq = matchStrings.joined()
+                    print(freq)
+                }
+            }
             
             if let geoArray = geometries {
                 if geoArray.count > 0 {
@@ -86,7 +102,8 @@ class NotamManager: NSObject {
                         let target = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
                         let home   = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                         distance = home.distance(to: target)
-                        text += "\nGPS:  \(target.latitude), \(target.longitude)\nDistance away: \(distance.metersToMiles())mi"
+                        gps = "\(target.latitude), \(target.longitude)"
+                        text += "\nGPS:  \(target.latitude), \(target.longitude)\nDistance away: \(distance.metersToMiles().format(suffix: " miles", decimals: 0))"
                         // print("Distance away: \(distance.metersToMiles())mi")
                     }
                 }
@@ -95,12 +112,12 @@ class NotamManager: NSObject {
             // print("NOTAM:  \(text)")
             
             if distance.metersToMiles() > 0 {
-                print("NOTAM in \(distance.metersToMiles().format(suffix: " miles", decimals: 0)) range at \(coordinate.latitude), \(coordinate.longitude)")
-                let notam = NotamData(id: id, number: number, type: type, issued: issued, location: location, effectiveStart: effectiveStart, effectiveEnd: effectiveEnd, text: text, classification: classification, accountId: accountId, lastUpdated: lastUpdated, icaoLocation: icaoLocation, schedule: schedule, notamTranslation: notamTranslation, geometryType: geometryType, geometries: geometries, coordinate: coordinate, distance: distance.metersToMiles())
+                // print("NOTAM in \(distance.metersToMiles().format(suffix: " miles", decimals: 0)) range at \(coordinate.latitude), \(coordinate.longitude)")
+                let notam = NotamData(id: id, number: number, type: type, issued: issued, location: location, effectiveStart: effectiveStart, effectiveEnd: effectiveEnd, text: text, classification: classification, accountId: accountId, lastUpdated: lastUpdated, icaoLocation: icaoLocation, schedule: schedule, notamTranslation: notamTranslation, geometryType: geometryType, geometries: geometries, coordinate: coordinate, distance: distance.metersToMiles(), freq: freq, gps: gps)
                 notamArray.append(notam)
-                print(notam)
+                // print(notam)
             } else {
-                print("NOTAM out of range (\(radius):  \(coordinate.latitude), \(coordinate.longitude)")
+                print("NOTAM out of range (\(radius):  \(coordinate.latitude), \(coordinate.longitude))")
             }
                         
         }

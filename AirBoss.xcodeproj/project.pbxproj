@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		912863912C92489200172F77 /* HeliAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912863902C92489200172F77 /* HeliAnimationView.swift */; };
-		912863932C9251E400172F77 /* NotamAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912863922C9251E400172F77 /* NotamAnnotationView.swift */; };
 		912863952C929A0D00172F77 /* NotamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912863942C929A0D00172F77 /* NotamData.swift */; };
 		913199522C877CB20012F1F6 /* CodableBundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913199512C877CB20012F1F6 /* CodableBundleExtension.swift */; };
 		9161A57D2C8BE98900BEE1E6 /* HomeLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9161A57C2C8BE98900BEE1E6 /* HomeLocation.swift */; };
 		9161A5802C8BE9D400BEE1E6 /* LocationDeniedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9161A57F2C8BE9D400BEE1E6 /* LocationDeniedView.swift */; };
 		9161A5832C8BEAA200BEE1E6 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9161A5822C8BEAA200BEE1E6 /* LocationManager.swift */; };
+		916BE57C2C95E78100468DB0 /* NotamAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916BE57B2C95E78100468DB0 /* NotamAnnotationView.swift */; };
+		916BE57E2C95E7A500468DB0 /* NotamAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916BE57D2C95E7A500468DB0 /* NotamAnnotation.swift */; };
 		918510442C84EDEB005D927C /* AirBossApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918510432C84EDEB005D927C /* AirBossApp.swift */; };
 		918510462C84EDEB005D927C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918510452C84EDEB005D927C /* ContentView.swift */; };
 		9185104A2C84EDEC005D927C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 918510492C84EDEC005D927C /* Assets.xcassets */; };
@@ -46,12 +47,13 @@
 
 /* Begin PBXFileReference section */
 		912863902C92489200172F77 /* HeliAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliAnimationView.swift; sourceTree = "<group>"; };
-		912863922C9251E400172F77 /* NotamAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamAnnotationView.swift; sourceTree = "<group>"; };
 		912863942C929A0D00172F77 /* NotamData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamData.swift; sourceTree = "<group>"; };
 		913199512C877CB20012F1F6 /* CodableBundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBundleExtension.swift; sourceTree = "<group>"; };
 		9161A57C2C8BE98900BEE1E6 /* HomeLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLocation.swift; sourceTree = "<group>"; };
 		9161A57F2C8BE9D400BEE1E6 /* LocationDeniedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDeniedView.swift; sourceTree = "<group>"; };
 		9161A5822C8BEAA200BEE1E6 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		916BE57B2C95E78100468DB0 /* NotamAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamAnnotationView.swift; sourceTree = "<group>"; };
+		916BE57D2C95E7A500468DB0 /* NotamAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamAnnotation.swift; sourceTree = "<group>"; };
 		918510402C84EDEB005D927C /* AirBoss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirBoss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		918510432C84EDEB005D927C /* AirBossApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirBossApp.swift; sourceTree = "<group>"; };
 		918510452C84EDEB005D927C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -130,7 +132,6 @@
 				9161A57F2C8BE9D400BEE1E6 /* LocationDeniedView.swift */,
 				9194226B2C914C910067231D /* RotorView.swift */,
 				912863902C92489200172F77 /* HeliAnimationView.swift */,
-				912863922C9251E400172F77 /* NotamAnnotationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +231,8 @@
 				91C3CA252C8E92FC00D6B5EE /* NotamManager.swift */,
 				919807842C8FF71F0005DCCD /* notam.json */,
 				912863942C929A0D00172F77 /* NotamData.swift */,
+				916BE57D2C95E7A500468DB0 /* NotamAnnotation.swift */,
+				916BE57B2C95E78100468DB0 /* NotamAnnotationView.swift */,
 			);
 			path = Notam;
 			sourceTree = "<group>";
@@ -309,7 +312,6 @@
 				9161A5802C8BE9D400BEE1E6 /* LocationDeniedView.swift in Sources */,
 				91ADD1CF2C8A681E002FC779 /* CGFloat+Extensions.swift in Sources */,
 				9161A5832C8BEAA200BEE1E6 /* LocationManager.swift in Sources */,
-				912863932C9251E400172F77 /* NotamAnnotationView.swift in Sources */,
 				91C3CA262C8E92FC00D6B5EE /* NotamManager.swift in Sources */,
 				918510462C84EDEB005D927C /* ContentView.swift in Sources */,
 				91ADD1C82C8A681E002FC779 /* CLLocation+Extensions.swift in Sources */,
@@ -318,6 +320,7 @@
 				912863952C929A0D00172F77 /* NotamData.swift in Sources */,
 				9161A57D2C8BE98900BEE1E6 /* HomeLocation.swift in Sources */,
 				91ADD1CB2C8A681E002FC779 /* Data+Extensions.swift in Sources */,
+				916BE57E2C95E7A500468DB0 /* NotamAnnotation.swift in Sources */,
 				91B7503B2C894699001BEAB9 /* MapView.swift in Sources */,
 				91B750362C89278F001BEAB9 /* WeatherBackgroundView.swift in Sources */,
 				91C3CA232C8E904500D6B5EE /* NotamModel.swift in Sources */,
@@ -335,6 +338,7 @@
 				91ADD1CA2C8A681E002FC779 /* String+Extensions.swift in Sources */,
 				9185105D2C855593005D927C /* ADSB.swift in Sources */,
 				91ADD1BD2C8A4D29002FC779 /* AttributionView.swift in Sources */,
+				916BE57C2C95E78100468DB0 /* NotamAnnotationView.swift in Sources */,
 				91B750342C892719001BEAB9 /* CurrentWeatherView.swift in Sources */,
 				91B750382C89290B001BEAB9 /* ColorExtension.swift in Sources */,
 			);

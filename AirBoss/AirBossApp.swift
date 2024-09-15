@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct AirBossApp: App {
     @State private var locationManager = LocationManager()
+    @State private var weatherManager = WeatherManager()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -35,6 +36,7 @@ struct AirBossApp: App {
             
         }
         .environment(locationManager)
+        .environment(weatherManager)
         .modelContainer(sharedModelContainer)
     }
 }

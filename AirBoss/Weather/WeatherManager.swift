@@ -12,9 +12,11 @@ import Foundation
 import WeatherKit
 import CoreLocation
 
+@Observable
 class WeatherManager {
     static let shared = WeatherManager()
     let service = WeatherService.shared
+    var currentWeatherSymbol : String = "cloud.fill"
     
     func currentWeather(for location: CLLocation) async -> (CurrentWeather, Forecast<DayWeather>)? {
         let currentWeather = await Task.detached(priority: .userInitiated) {
@@ -22,6 +24,9 @@ class WeatherManager {
                 for: location,
                 including: .current, .daily
             )
+            if let symbol = forecast?.0.symbolName {
+                self.currentWeatherSymbol = symbol
+            }
             return forecast
         }.value
         return currentWeather
