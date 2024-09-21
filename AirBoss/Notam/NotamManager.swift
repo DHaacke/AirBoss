@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+@Observable
 class NotamManager: NSObject {
     
     // 45.79208074322167, -108.56983021630413

@@ -97,8 +97,6 @@ struct NotamSheetView: View {
         }
         
     }
-    
-    
 }
 
 //#Preview {

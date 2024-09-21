@@ -11,8 +11,11 @@ import CoreLocation
 
 struct CurrentWeatherView: View {
     // MARK: - PROPERTIES
+    var isShowingWeather: Bool
+    
     let weatherManager = WeatherManager.shared
     @Environment(LocationManager.self) var locationManager
+   
     @State private var homeLocation: HomeLocation?
     @State private var currentWeather: (CurrentWeather, Forecast<DayWeather>)?
     @State private var isLoading = false
@@ -104,7 +107,7 @@ struct CurrentWeatherView: View {
     
     // MARK: - BODY
     var body: some View {
-
+        if isShowingWeather {
             ZStack {
                 VStack {
                     Color.customBlackLight
@@ -151,9 +154,9 @@ struct CurrentWeatherView: View {
                             }
                         }
                     }
+                    .padding()
                 }
             }
-            .padding()
             .frame(width: 260, height: 380)
             .task {
                 Task.detached { @MainActor in
@@ -175,6 +178,7 @@ struct CurrentWeatherView: View {
                     await fetchWeather(for: selectedHomeLocation)
                 }
             }
+        }
     }
     
     func fetchWeather(for homeLocation: HomeLocation) async {
@@ -188,7 +192,7 @@ struct CurrentWeatherView: View {
 }
 
 #Preview {
-    CurrentWeatherView()
+    CurrentWeatherView(isShowingWeather: false)
         .environment(LocationManager())
 }
 

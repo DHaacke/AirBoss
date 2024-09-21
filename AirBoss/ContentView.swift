@@ -17,20 +17,21 @@ import AudioToolbox
 struct ContentView: View {
     
     // MARK: - PROPERTIES
-    //    @Environment(\.modelContext) private var modelContext
-    //    @Query private var items: [Item]
+    @Environment(\.modelContext) private var modelContext
     @Environment(LocationManager.self) var locationManager
     @Environment(WeatherManager.self) var weatherManager
     
     @State private var selectedHomeLocation: HomeLocation?
     @State private var isLoading = false
-    @State private var isShowingWeather = false
+    @State var isShowingWeather = false
+    @State var isShowingNotams = false
+
     
     @State private var position: MapCameraPosition = .automatic
     @State private var homeLocation: HomeLocation?
     @State private var currentLocation2D: CLLocationCoordinate2D?
-    @State private var websocket = Websocket()
-    @State private var adsb : ADSB = Bundle.main.decode("ADSB.json")
+//    @State private var websocket = Websocket()
+//    @State private var adsb : ADSB?  // = Bundle.main.decode("ADSB.json")
    
     
     // MARK: - FUNCTIONS
@@ -41,18 +42,19 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Group {
-                MapView()
+                MapView(isShowingNotams: isShowingNotams)
                     .tabItem {
-                    Label("Map", systemImage: "map")
-                }
+                        Label("Map", systemImage: "map")
+                    }
                     .overlay (alignment: .topLeading) {
                     VStack {
                         if isLoading {
                              ProgressView()
-                             Text("Loading...")
+                             Text("  Loading...")
                         } else {
                             if isShowingWeather {
-                                CurrentWeatherView()
+                                CurrentWeatherView(isShowingWeather: isShowingWeather)
+                                    .padding(12)
                                     .onTapGesture {
                                         isShowingWeather.toggle()
                                     }
@@ -67,47 +69,42 @@ struct ContentView: View {
                                     }
                             }
                         }
+                        Image(systemName: "square.and.pencil" )
+                            .renderingMode(.original)
+                            .symbolVariant(.fill)
+                            .font(.system(size: 30.0, weight: .bold))
+                            .padding(.bottom, 0)
+                            .onTapGesture {
+                                isShowingNotams.toggle()
+                            }
+                        if isShowingNotams {
+                            Text("Hide")
+                                .padding(.top, 0)
+                                .font(.system(size: 12.0, weight: .medium))
+                        }
+                        Text("Notams")
+                            .padding(.top, 0)
+                            .font(.system(size: 12.0, weight: .medium))
                     }
                     .padding(.top, 12)
                 }
-                CurrentWeatherView()
+                
+                CurrentWeatherView(isShowingWeather: true)
                     .tabItem {
                         Label("Weather", systemImage: "cloud.rain")
                     }
+                
+                ImportView(minimumDate: .now)
+                    .tabItem {
+                        Label("Import", systemImage: "square.and.arrow.down")
+                    }
+                
+
+                    
             }
             .toolbarBackground(.colorBlackDark.opacity(0.8), for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
             .toolbarColorScheme(.dark, for: .tabBar)
-        }
-        
-//        ZStack {
-//            // Color(.darkGray).ignoresSafeArea(.all, edges: .all)
-//            GeometryReader { g in
-//                VStack {
-//                    MapView()
-//                        .overlay (alignment: .topLeading) {
-//                            VStack {
-//                                if isLoading {
-//                                     ProgressView()
-//                                     Text("Loading...")
-//                                } else {
-//                                    CurrentWeatherView()
-//                                        .padding(.leading, 2)
-//                                }
-//                            }
-//                        }
-//                }
-//            }
-//        }
-        // .frame(width: visible ? .infinity : 0, height: visible ? .infinity : 0, alignment: .center)
-//        .onReceive(Just(websocket.message)) { _ in
-//            // print("---> Just onReceive message: \(websocket.message)")
-//            // AudioServicesPlaySystemSound(1026)
-//        }
-        .onReceive(Just(websocket.adsb)) { _ in
-            if websocket.adsb != nil {
-                adsb = websocket.adsb!
-            }
         }
         .task(id: locationManager.currentLocation) {
             isLoading = true

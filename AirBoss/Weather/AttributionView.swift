@@ -22,6 +22,7 @@ struct AttributionView: View {
                     } placeholder: {
                         ProgressView()
                     }
+               //      .padding(.top, 6)
                 // Text(.init("[\(attribution.serviceName)](\(attribution.legalPageURL))"))
             }
             

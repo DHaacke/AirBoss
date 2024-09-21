@@ -110,7 +110,7 @@ struct HeightInformation: Decodable {
     let uomLowerLevel: String
 }
 
-extension CLLocationCoordinate2D : Decodable {
+extension CLLocationCoordinate2D : @retroactive Decodable {
     public init(from decoder: Decoder) throws {
         var arrayContainer = try decoder.unkeyedContainer()
         let lat = try arrayContainer.decode(CLLocationDegrees.self)

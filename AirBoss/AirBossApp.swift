@@ -15,7 +15,7 @@ struct AirBossApp: App {
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-           //  Item.self
+           Aircraft.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

@@ -20,6 +20,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     var userLocation: CLLocation?
     var currentLocation: HomeLocation?
     var isAuthorized = false
+    var isLocationUpdated = false
     
     var currentLocation2D: CLLocationCoordinate2D?
     var region: MKCoordinateRegion?
@@ -44,24 +45,38 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
     }
     
+    
     func locationManager(_ manager: CLLocationManager, didUpdateAltitude locations: [CLLocation]) {
-        
+        print("* * * Updated altitude!")
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        switch manager.accuracyAuthorization {
+            case .fullAccuracy:
+                break;
+            case .reducedAccuracy:
+                break;
+            @unknown default:
+                break;
+        }
         userLocation = locations.last
         if let userLocation {
-            print("Updated location")
+            // print("Updated location")
             Task.detached { @MainActor in
                 let name = await self.getLocationName(for: userLocation)
                 self.currentLocation = HomeLocation(
                     name: name,
                     latitude: userLocation.coordinate.latitude,
                     longitude: userLocation.coordinate.longitude,
-                    altitude: userLocation.altitude.magnitude * 3.281
+                    altitude: userLocation.altitude * 3.281
                 )
-                self.currentLocation2D = CLLocationCoordinate2D(latitude: self.currentLocation?.latitude ?? 0, longitude: self.currentLocation?.longitude ?? 0)
-                self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: self.currentLocation?.latitude ?? 0, longitude: self.currentLocation?.longitude ?? 0), span: MKCoordinateSpan(latitudeDelta: 8.0, longitudeDelta: 8.0))
+                self.currentLocation2D = CLLocationCoordinate2D(latitude: self.userLocation?.coordinate.latitude ?? 0, longitude: self.userLocation?.coordinate.longitude ?? 0)
+                if let currentLocation2D = self.currentLocation2D {
+                    // print("\(String(describing: currentLocation.altitude))ft")
+                    self.region = MKCoordinateRegion(center: currentLocation2D,
+                                                     span: MKCoordinateSpan(latitudeDelta: 8.0, longitudeDelta: 8.0))
+                }
+                self.isLocationUpdated = true
             }
         }
     }
