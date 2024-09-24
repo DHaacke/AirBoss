@@ -99,7 +99,15 @@ struct ContentView: View {
                         Label("Import", systemImage: "square.and.arrow.down")
                     }
                 
+                IcaoTypeTableView()
+                    .tabItem {
+                        Label("ICAO Types", systemImage: "list.bullet.rectangle")
+                    }
 
+                AircraftTableView()
+                    .tabItem {
+                        Label("Aircraft", systemImage: "airplane")
+                    }
                     
             }
             .toolbarBackground(.colorBlackDark.opacity(0.8), for: .tabBar)
@@ -120,7 +128,7 @@ struct ContentView: View {
 
 #Preview {
     // @State var adsb: ADSB = Bundle.main.decode("adsb.json")
-
+    
     ContentView()
         .environment(LocationManager())
         .environment(WeatherManager())

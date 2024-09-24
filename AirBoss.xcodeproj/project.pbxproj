@@ -30,6 +30,9 @@
 		9185105D2C855593005D927C /* ADSB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9185105C2C855593005D927C /* ADSB.swift */; };
 		9194226C2C914C910067231D /* RotorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9194226B2C914C910067231D /* RotorView.swift */; };
 		919807852C8FF71F0005DCCD /* notam.json in Resources */ = {isa = PBXBuildFile; fileRef = 919807842C8FF71F0005DCCD /* notam.json */; };
+		91A568F82C9E890200BE9CE3 /* BlueButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A568F72C9E890200BE9CE3 /* BlueButtonView.swift */; };
+		91AB30322CA0F8210077216A /* RedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91AB30312CA0F8210077216A /* RedButtonView.swift */; };
+		91AB30342CA2270F0077216A /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 91AB30332CA2270F0077216A /* Starscream */; };
 		91ADD1BB2C8A0818002FC779 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ADD1BA2C8A0818002FC779 /* WeatherManager.swift */; };
 		91ADD1BD2C8A4D29002FC779 /* AttributionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ADD1BC2C8A4D29002FC779 /* AttributionView.swift */; };
 		91ADD1BF2C8A6065002FC779 /* DayWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91ADD1BE2C8A6065002FC779 /* DayWeatherView.swift */; };
@@ -45,6 +48,9 @@
 		91B750362C89278F001BEAB9 /* WeatherBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B750352C89278F001BEAB9 /* WeatherBackgroundView.swift */; };
 		91B750382C89290B001BEAB9 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B750372C89290B001BEAB9 /* ColorExtension.swift */; };
 		91B7503B2C894699001BEAB9 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B7503A2C894699001BEAB9 /* MapView.swift */; };
+		91BDE13E2C9F8DEB0003CA36 /* IcaoTypeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BDE13D2C9F8DEB0003CA36 /* IcaoTypeTableView.swift */; };
+		91BDE1402C9FBC160003CA36 /* AircraftTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BDE13F2C9FBC160003CA36 /* AircraftTableView.swift */; };
+		91BDE1422C9FC4F30003CA36 /* CircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BDE1412C9FC4F30003CA36 /* CircularProgress.swift */; };
 		91C3CA232C8E904500D6B5EE /* NotamModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3CA222C8E904500D6B5EE /* NotamModel.swift */; };
 		91C3CA262C8E92FC00D6B5EE /* NotamManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3CA252C8E92FC00D6B5EE /* NotamManager.swift */; };
 		91C3CA282C8E992F00D6B5EE /* URLSession+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91C3CA272C8E992F00D6B5EE /* URLSession+Extension.swift */; };
@@ -77,6 +83,8 @@
 		9185105C2C855593005D927C /* ADSB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADSB.swift; sourceTree = "<group>"; };
 		9194226B2C914C910067231D /* RotorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotorView.swift; sourceTree = "<group>"; };
 		919807842C8FF71F0005DCCD /* notam.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = notam.json; path = AirBoss/Models/notam.json; sourceTree = SOURCE_ROOT; };
+		91A568F72C9E890200BE9CE3 /* BlueButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueButtonView.swift; sourceTree = "<group>"; };
+		91AB30312CA0F8210077216A /* RedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedButtonView.swift; sourceTree = "<group>"; };
 		91ADD1BA2C8A0818002FC779 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		91ADD1BC2C8A4D29002FC779 /* AttributionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributionView.swift; sourceTree = "<group>"; };
 		91ADD1BE2C8A6065002FC779 /* DayWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeatherView.swift; sourceTree = "<group>"; };
@@ -93,6 +101,9 @@
 		91B750372C89290B001BEAB9 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		91B7503A2C894699001BEAB9 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		91B7503C2C8963FE001BEAB9 /* AirBoss.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AirBoss.entitlements; sourceTree = "<group>"; };
+		91BDE13D2C9F8DEB0003CA36 /* IcaoTypeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IcaoTypeTableView.swift; sourceTree = "<group>"; };
+		91BDE13F2C9FBC160003CA36 /* AircraftTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AircraftTableView.swift; sourceTree = "<group>"; };
+		91BDE1412C9FC4F30003CA36 /* CircularProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgress.swift; sourceTree = "<group>"; };
 		91C3CA222C8E904500D6B5EE /* NotamModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamModel.swift; sourceTree = "<group>"; };
 		91C3CA252C8E92FC00D6B5EE /* NotamManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotamManager.swift; sourceTree = "<group>"; };
 		91C3CA272C8E992F00D6B5EE /* URLSession+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Extension.swift"; sourceTree = "<group>"; };
@@ -107,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91556CD32C9B8F5400614043 /* Starscream in Frameworks */,
+				91AB30342CA2270F0077216A /* Starscream in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +161,9 @@
 				9161A57F2C8BE9D400BEE1E6 /* LocationDeniedView.swift */,
 				9194226B2C914C910067231D /* RotorView.swift */,
 				912863902C92489200172F77 /* HeliAnimationView.swift */,
+				91BDE13D2C9F8DEB0003CA36 /* IcaoTypeTableView.swift */,
+				91BDE13F2C9FBC160003CA36 /* AircraftTableView.swift */,
+				91BDE1412C9FC4F30003CA36 /* CircularProgress.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,6 +206,7 @@
 		918510422C84EDEB005D927C /* AirBoss */ = {
 			isa = PBXGroup;
 			children = (
+				91A568F62C9E88E600BE9CE3 /* Components */,
 				91B7503C2C8963FE001BEAB9 /* AirBoss.entitlements */,
 				91DAABAC2C9DD24300E51DF3 /* Import */,
 				91812E4F2C97DF51006388FD /* Traffic */,
@@ -233,6 +249,15 @@
 				918510572C8537BF005D927C /* NOT USED ADSB.swift */,
 			);
 			path = "SwiftData Models";
+			sourceTree = "<group>";
+		};
+		91A568F62C9E88E600BE9CE3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				91A568F72C9E890200BE9CE3 /* BlueButtonView.swift */,
+				91AB30312CA0F8210077216A /* RedButtonView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		91B750322C8926FD001BEAB9 /* Weather */ = {
@@ -352,8 +377,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9161A5802C8BE9D400BEE1E6 /* LocationDeniedView.swift in Sources */,
+				91BDE1422C9FC4F30003CA36 /* CircularProgress.swift in Sources */,
 				91ADD1CF2C8A681E002FC779 /* CGFloat+Extensions.swift in Sources */,
 				9161A5832C8BEAA200BEE1E6 /* LocationManager.swift in Sources */,
+				91AB30322CA0F8210077216A /* RedButtonView.swift in Sources */,
 				91C3CA262C8E92FC00D6B5EE /* NotamManager.swift in Sources */,
 				918510462C84EDEB005D927C /* ContentView.swift in Sources */,
 				91ADD1C82C8A681E002FC779 /* CLLocation+Extensions.swift in Sources */,
@@ -379,11 +406,14 @@
 				91DAABAB2C9DCA5600E51DF3 /* Aircraft.swift in Sources */,
 				91ADD1BB2C8A0818002FC779 /* WeatherManager.swift in Sources */,
 				91ADD1C92C8A681E002FC779 /* Date+Extensions.swift in Sources */,
+				91BDE13E2C9F8DEB0003CA36 /* IcaoTypeTableView.swift in Sources */,
 				918510582C8537BF005D927C /* NOT USED ADSB.swift in Sources */,
 				913199522C877CB20012F1F6 /* CodableBundleExtension.swift in Sources */,
+				91A568F82C9E890200BE9CE3 /* BlueButtonView.swift in Sources */,
 				9139459C2C9CACEE00A6FAAA /* TrafficAnnotationView.swift in Sources */,
 				9139459E2C9CB38C00A6FAAA /* TrafficAnnotation.swift in Sources */,
 				91ADD1CA2C8A681E002FC779 /* String+Extensions.swift in Sources */,
+				91BDE1402C9FBC160003CA36 /* AircraftTableView.swift in Sources */,
 				9185105D2C855593005D927C /* ADSB.swift in Sources */,
 				91ADD1BD2C8A4D29002FC779 /* AttributionView.swift in Sources */,
 				916BE57C2C95E78100468DB0 /* NotamAnnotationView.swift in Sources */,
@@ -621,6 +651,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		91556CD22C9B8F5400614043 /* Starscream */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91556CD12C9B8F5400614043 /* XCRemoteSwiftPackageReference "Starscream" */;
+			productName = Starscream;
+		};
+		91AB30332CA2270F0077216A /* Starscream */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 91556CD12C9B8F5400614043 /* XCRemoteSwiftPackageReference "Starscream" */;
 			productName = Starscream;

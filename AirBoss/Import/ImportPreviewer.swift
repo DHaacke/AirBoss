@@ -26,9 +26,12 @@ struct Previewer {
         icaoType2 = IcaoType(icaoType: "DXH2", manufacturer: "Douglas", model: "DXH-1000", icon: "L1PL", altIcon: "", date: .now.addingTimeInterval(86400 * -10 ))
         icaoType3 = IcaoType(icaoType: "DXH3", manufacturer: "Douglas", model: "DXH-1000", icon: "L1PL", altIcon: "", date: .now.addingTimeInterval(86400 * 10 ))
         
-        aircraft1 = Aircraft(icao: 1, callSign: "DOUG1", reg: "DOUG1", icao_type: icaoType1, owner: "J.Douglas Haacke", mil: "N", alert: "Y", date: .now)
-        aircraft2 = Aircraft(icao: 2, callSign: "DOUG2", reg: "DOUG2", icao_type: icaoType2, owner: "J.Douglas Haacke", mil: "N", alert: "Y", date: .now.addingTimeInterval(86400 * -10))
-        aircraft3 = Aircraft(icao: 3, callSign: "DOUG3", reg: "DOUG3", icao_type: icaoType2, owner: "J.Douglas Haacke", mil: "N", alert: "Y", date: .now.addingTimeInterval(86400 * 10))
+        aircraft1 = Aircraft(icao: 1, callSign: "DOUG1", reg: "DOUG1", owner: "J.Douglas Haacke", mil: "N", alert: "Y", date: .now)
+        aircraft1.icaoType = icaoType1
+        aircraft2 = Aircraft(icao: 2, callSign: "DOUG2", reg: "DOUG2", owner: "J.Douglas Haacke", mil: "N", alert: "Y", date: .now.addingTimeInterval(86400 * -10))
+        aircraft2.icaoType = icaoType2
+        aircraft3 = Aircraft(icao: 3, callSign: "DOUG3", reg: "DOUG3", owner: "J.Douglas Haacke", mil: "N", alert: "Y", date: .now.addingTimeInterval(86400 * 10))
+        aircraft3.icaoType = icaoType3
         
         container.mainContext.insert(aircraft1)
         container.mainContext.insert(aircraft2)

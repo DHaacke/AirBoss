@@ -13,17 +13,18 @@ class Aircraft {
     @Attribute(.unique) var icao: Int64 = 0
     var callSign: String = ""
     var reg: String = ""
-    var icaoType: IcaoType? = nil
+    @Relationship(inverse: \IcaoType.aircraft)
+      var icaoType: IcaoType?
+    // var icaoType: IcaoType? = nil
     var owner: String = ""
     var mil: String = ""
     var alert: String = ""
     var date: Date = Date()
     
-    init(icao: Int64, callSign: String, reg: String, icao_type: IcaoType, owner: String, mil: String, alert: String, date: Date) {
+    init(icao: Int64, callSign: String, reg: String, owner: String, mil: String, alert: String, date: Date) {
         self.icao = icao
         self.callSign = callSign
         self.reg = reg
-        self.icaoType = icao_type
         self.owner = owner
         self.mil = mil
         self.alert = alert
@@ -34,6 +35,7 @@ class Aircraft {
 @Model
 class IcaoType {
     @Attribute(.unique) var icaoType: String = ""
+    var aircraft: [Aircraft]? = nil
     var manufacturer: String = ""
     var model: String = ""
     var icon: String = ""
